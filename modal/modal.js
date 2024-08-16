@@ -4,23 +4,18 @@ const modalCashOutTrigger = document.querySelector('.cash-out')
 const modalSendTrgger = document.querySelector('.send')
 const modalInput = document.querySelector('input')
 
-
-
-
-let receiveSum
+let inputMoney
 
 function checkNum() {
     let sum = Number (modalInput.value)
 
     if(Number.isInteger(sum)) {
-        receiveSum = sum
+        inputMoney = sum
     } else {
         alert('Write a number!')
-        return receiveSum = ''
+        return inputMoney = ''
     }
 }
-
-
 
 // Modal Window Receive
 
@@ -28,7 +23,6 @@ const modalReceiveBackground = document.querySelector('.modalReceive_background'
 const modalReceiveActive = document.querySelector('.modalReceive_active')
 const modalReceiveClose = document.querySelector('.modalReceive_close')
 const modalReceiveButton = document.querySelector('.buttonReceive')
-const modalCashOutButton = document.querySelector('.buttonCashOut')
 
 
 modalReceiveTrigger.addEventListener('click', function () {
@@ -51,10 +45,10 @@ modalReceiveButton.addEventListener('click', function () {
     checkNum()
 
     let moneyM = JSON.parse(localStorage.getItem(enteredUser.userName))
-    let moneyHtml = receiveSum + moneyM.userMoney
+    let moneyHtml = inputMoney + moneyM.userMoney
     money.textContent = moneyHtml
     enteredUser.userMoney = moneyHtml
-    console.log(receiveSum)
+    console.log(inputMoney)
     localStorage.setItem(enteredUser.userName, JSON.stringify(enteredUser))
 
 
@@ -64,65 +58,48 @@ modalReceiveButton.addEventListener('click', function () {
 
 })
 
-modalCashOutButton.addEventListener('click', function () {
-    checkNum()
-
-    let moneyM = JSON.parse(localStorage.getItem(enteredUser.userName))
-    let moneyHtml = moneyM.userMoney - receiveSum
-    money.textContent = moneyHtml
-    enteredUser.userMoney = moneyHtml
-    console.log(receiveSum)
-    localStorage.setItem(enteredUser.userName, JSON.stringify(enteredUser))
-
-
-    modalReceiveBackground.style.display = 'none'
-
-    modalInput.value = ''
-
-})
 
 
 // Modal Window Cash Out
 
-// const modalCashOutBackground = document.querySelector('.modalCashOut_background')
-// const modalCashOutActive = document.querySelector('.modalCashOut_active')
-// const modalCashOutClose = document.querySelector('.modalCashOut_close')
-// const modalCashOutButton = document.querySelector('.buttonCashOut')
-// const modalCashOutInput = document.querySelector('.modalCashOut_input')
+const modalCashOutBackground = document.querySelector('.modalCashOut_background')
+const modalCashOutActive = document.querySelector('.modalCashOut_active')
+const modalCashOutClose = document.querySelector('.modalCashOut_close')
+const modalCashOutButton = document.querySelector('.buttonCashOut')
+const modalCashOutInput = document.querySelector('.modalCashOut_input')
 
 
-// modalCashOutTrigger.addEventListener('click', function () {
-//     modalCashOutBackground.style.display = 'block'
-// })
+modalCashOutTrigger.addEventListener('click', function () {
+    modalCashOutBackground.style.display = 'block'
+})
 
-// modalCashOutClose.addEventListener('click', function () {
-//     modalCashOutBackground.style.display = 'none'
-//     modalInput.value = ''
+modalCashOutClose.addEventListener('click', function () {
+    modalCashOutBackground.style.display = 'none'
+    modalInput.value = ''
 
-// })
+})
 
-// modalCashOutBackground.addEventListener('click', function(event) {
-//     if (event.target === modalCashOutBackground) {
-//         modalCashOutBackground.style.display = 'none'
-//     }
-// })
+modalCashOutBackground.addEventListener('click', function(event) {
+    if (event.target === modalCashOutBackground) {
+        modalCashOutBackground.style.display = 'none'
+    }
+})
 
-// modalCashOutButton.addEventListener('click', function () {
-//     // checkNum()
-//     let sumC = Number (modalCashOutInput.value)
-//     let moneyM = JSON.parse(localStorage.getItem(enteredUser.userName))
-//     let moneyHtml = moneyM.userMoney - sumC
-//     console.log(sumC)
-//     money.textContent = moneyHtml
-//     enteredUser.userMoney = moneyHtml
-//     localStorage.setItem(enteredUser.userName, JSON.stringify(enteredUser))
+modalCashOutButton.addEventListener('click', function () {
+    checkNum()
+    let moneyM = JSON.parse(localStorage.getItem(enteredUser.userName))
+    let moneyHtml = moneyM.userMoney - inputMoney
+    money.textContent = moneyHtml
+    enteredUser.userMoney = moneyHtml
+    localStorage.setItem(enteredUser.userName, JSON.stringify(enteredUser))
 
 
-//     modalCashOutBackground.style.display = 'none'
+    modalCashOutBackground.style.display = 'none'
 
-//     modalInput.value = ''
+    modalInput.value = ''
 
-// })
+
+})
 
 
 // Modal Window Send

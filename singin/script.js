@@ -20,7 +20,7 @@ form.onsubmit = function(evt) {
 
     const name = userName.value
     const surname = userSurname.value
-    const money = ''
+    const money = 500
     const user = new User(name, surname, money)
 
     const userId = 'User' + createId(users)
